@@ -88,12 +88,12 @@ public class UserJPAResource {
     }
 
     @PostMapping("/jpa/users/{id}/posts")
-    public ResponseEntity addUserPosts(@PathVariable Integer id, @Valid @RequestBody  Post post){
+    public ResponseEntity addUserPosts(@PathVariable Integer id, @Valid @RequestBody  Post post) {
 
         Optional<User> user1 = reposotory.findById(id);
 
-        if (!user1.isPresent()){
-            throw new UserNotFoundException("USer do not exist with Id+ "+ id);
+        if (!user1.isPresent()) {
+            throw new UserNotFoundException("USer do not exist with Id+ " + id);
         }
         User user = user1.get();
         post.setUser(user);
@@ -104,6 +104,6 @@ public class UserJPAResource {
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getId()).toUri();
 
         return ResponseEntity.created(location).build();
-
+    }
 
 }
